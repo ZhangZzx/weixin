@@ -1,0 +1,1 @@
+"D:\Program Files\wamp\bin\php\php5.3.3\php.exe" "D:\Program Files\wamp\www\zzx\BirthdayMessage\send.php"

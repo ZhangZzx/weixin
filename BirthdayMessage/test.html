@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动发送信息</title>
+<script src="my.js"  type="text/javascript"></script>
+<script type="text/javascript">
+/*function time(){
+var today=new Date();
+var mytime=today.toLocaleString();
+document.write(mytime);
+}
+time();*/
+
+//循环执行，每隔3秒钟执行一次showalert（） 
+/*window.setInterval(showalert, 3000); 
+function showalert() 
+{ 
+alert("bbb"); 
+window.location.href="http://wx.lonking.cn/zzx/BirthdayMessage/test2.php";
+} */
+var myXmlHttpRequest;
+
+function sendMessage(){
+	myXmlHttpRequest=getXmlHttpObject();
+	if(myXmlHttpRequest){
+		//document.write("成功");
+		//创建ajax成功
+		var url="test2.php";
+		var data="";
+		
+		myXmlHttpRequest.open("post",url,true);
+		myXmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		
+		//指定回调函数
+		myXmlHttpRequest.onreadystatechange=function chuli(){
+			//接收数据json
+			if(myXmlHttpRequest.readyState==4){
+				if(myXmlHttpRequest.status==200){
+					//取出数据
+					var  res_objects
+				}
+			}
+			
+		}
+		
+	}else{
+		document.write("失败");
+	}
+}
+//使用定时器
+window.setInterval("sendMessage()",5000);
+</script>
+</head>
+<body>
+	<?php
+require_once 'sendMessage2.php';
+include_once 'getUserID.php';
+require_once 'SqlHelper.class.php';
+$now_time=date("m-d",time());
+$sqlHelper=new SqlHelper();
+$sql="select emp_name,emp_id from empinfo where birthday like '%$now_time'";
+$res=$sqlHelper->excute_dql2($sql);
+
+/*foreach($res as $k=>$val){
+	//echo $val['emp_id']."-".$val['weixin_id']."-".$val['emp_name'];
+	//$now_time=date("Y-m-d H:i:s",time());
+	echo sendMessage($val['emp_id'],"【中国龙工】".$val['emp_name']."贤才：公司的发展离不开您的辛勤和智慧，离不开您家人的支持和奉献，在此表示衷心的感谢！在您生日之际送上最诚挚的祝福，祝您生日快乐、万事如意！中国龙工控股有限公司董事局主席 李新炎");
+}*/
+?>
+</body>
+</html>
